@@ -1,133 +1,325 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity Web Player | NFC_Project</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-  </head>
-  <body>
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meine Spiele- und Video-Webseite</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101827;
+      color: white;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #17233b;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px #0008;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .school-button {
+      background: #ffca28;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 12px 18px;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .school-button:hover {
+      background: #ffe082;
+      transform: scale(1.04);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    section {
+      margin-bottom: 45px;
+    }
+
+    h2 {
+      color: #ffca28;
+      border-bottom: 2px solid #ffca28;
+      padding-bottom: 8px;
+    }
+
+    .video-grid,
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .video-card,
+    .game-card {
+      background: #1d2b46;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 10px #0005;
+    }
+
+    iframe {
+      width: 100%;
+      height: 190px;
+      border: 0;
+      border-radius: 8px;
+    }
+
+    .game-card {
+      text-align: center;
+      min-height: 145px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .game-card h3 {
+      margin: 8px 0;
+      font-size: 18px;
+    }
+
+    .play-button {
+      display: inline-block;
+      background: #42d392;
+      color: #071b12;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 7px;
+    }
+
+    .play-button:hover {
+      background: #72efb3;
+    }
+
+    .notice {
+      background: #263957;
+      padding: 15px;
+      border-left: 5px solid #ffca28;
+      border-radius: 6px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #17233b;
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎮 Meine Spiele- und Videoseite</h1>
+
+    <!-- Link zur Online-Schule Saarland -->
+    <a
+      class="school-button"
+      href="https://www.online-schule.saarland.de/"
+      target="_blank"
+      rel="noopener noreferrer">
+      🏫 Online-Schule Saarland
+    </a>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>📺 YouTube-Videos</h2>
+
+      <div class="notice">
+        Wenn ein Video nicht angezeigt wird, hat der YouTube-Kanal das Einbetten
+        möglicherweise deaktiviert. Du kannst die Video-IDs im Code austauschen.
+      </div>
+
+      <br>
+
+      <div class="video-grid">
+
+        <div class="video-card">
+          <h3>Video 1</h3>
+          <iframe
+            src="https://www.youtube.com/embed/jNQXAC9IVRw"
+            allowfullscreen>
+          </iframe>
         </div>
+
+        <div class="video-card">
+          <h3>Video 2</h3>
+          <iframe
+            src="https://www.youtube.com/embed/9bZkp7q19f0"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 3</h3>
+          <iframe
+            src="https://www.youtube.com/embed/kJQP7kiw5Fk"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 4</h3>
+          <iframe
+            src="https://www.youtube.com/embed/60ItHLz5WEA"
+            allowfullscreen>
+          </iframe>
+        </div>
+
       </div>
-      <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <div id="unity-logo-title-footer"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">NFC_Project</div>
+    </section>
+
+    <section>
+      <h2>🕹️ Mehr als 50 Spiele</h2>
+
+      <div class="game-grid">
+
+        <script>
+          const spiele = [
+            "Action Games",
+            "Adventure Games",
+            "Arcade Spiele",
+            "Autorennen",
+            "Basketball",
+            "Billard",
+            "Brettspiele",
+            "Bubble Shooter",
+            "Cars Spiele",
+            "Casual Games",
+            "Denkspiele",
+            "Domino",
+            "Doodle Jump",
+            "Drachen Spiele",
+            "Fußball",
+            "Farbenspiele",
+            "Flappy Bird",
+            "Golf",
+            "Halloween Spiele",
+            "Jump and Run",
+            "Kartenspiele",
+            "Klassische Spiele",
+            "Kochspiele",
+            "Lernspiele",
+            "Mahjong",
+            "Mausspiele",
+            "Memory",
+            "Minecraft Spiele",
+            "Motorrad Spiele",
+            "Multiplayer Spiele",
+            "Musikspiele",
+            "Parkour",
+            "Pferdespiele",
+            "Pixel Spiele",
+            "Puzzle",
+            "Quizspiele",
+            "Rennspiele",
+            "RPG Spiele",
+            "Schach",
+            "Schießspiele",
+            "Schneeball Spiele",
+            "Schulspiele",
+            "Skateboard",
+            "Snake",
+            "Solitaire",
+            "Sportspiele",
+            "Sudoku",
+            "Superhelden Spiele",
+            "Tetris",
+            "Tower Defense",
+            "Truck Spiele",
+            "Typing Games",
+            "Wasser Spiele",
+            "Wortspiele",
+            "Zombie Spiele",
+            "2-Spieler-Spiele",
+            "3D Spiele",
+            "4-Gewinnt",
+            "2048",
+            "Karten-Memory"
+          ];
+
+          const zielseite = "https://poki.com/de";
+
+          spiele.forEach((spiel, index) => {
+            document.write(`
+              <div class="game-card">
+                <h3>🎮 ${index + 1}. ${spiel}</h3>
+                <a
+                  class="play-button"
+                  href="${zielseite}"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Jetzt spielen
+                </a>
+              </div>
+            `);
+          });
+        </script>
+
       </div>
-    </div>
-    <script>
-      var canvas = document.querySelector("#unity-canvas");
+    </section>
 
-      // Shows a temporary message banner/ribbon for a few seconds, or
-      // a permanent error message on top of the canvas if type=='error'.
-      // If type=='warning', a yellow highlight color is used.
-      // Modify or remove this function to customize the visually presented
-      // way that non-critical warnings and error messages are presented to the
-      // user.
-      function unityShowBanner(msg, type) {
-        var warningBanner = document.querySelector("#unity-warning");
-        function updateBannerVisibility() {
-          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
-        }
-        var div = document.createElement('div');
-        div.innerHTML = msg;
-        warningBanner.appendChild(div);
-        if (type == 'error') div.style = 'background: red; padding: 10px;';
-        else {
-          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
-          setTimeout(function() {
-            warningBanner.removeChild(div);
-            updateBannerVisibility();
-          }, 5000);
-        }
-        updateBannerVisibility();
-      }
+    <section>
+      <h2>🏫 Online-Schule Saarland</h2>
 
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/NFC_Web.loader.js";
-      var config = {
-        arguments: [],
-        dataUrl: buildUrl + "/NFC_Web.data.br",
-        frameworkUrl: buildUrl + "/NFC_Web.framework.js.br",
-        codeUrl: buildUrl + "/NFC_Web.wasm.br",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "NFC_Project",
-        productVersion: "0.1.0",
-        showBanner: unityShowBanner,
-        // errorHandler: function(err, url, line) {
-        //    alert("error " + err + " occurred at line " + line);
-        //    // Return 'true' if you handled this error and don't want Unity
-        //    // to process it further, 'false' otherwise.
-        //    return true;
-        // },
-      };
+      <div class="notice">
+        Über den Button oben kannst du direkt die Online-Schule Saarland
+        in einem neuen Tab öffnen.
+        <br><br>
 
-      // By default, Unity keeps WebGL canvas render target size matched with
-      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-      // Set this to false if you want to decouple this synchronization from
-      // happening inside the engine, and you would instead like to size up
-      // the canvas DOM size and WebGL render target sizes yourself.
-      // config.matchWebGLToCanvasSize = false;
+        <a
+          class="school-button"
+          href="https://www.online-schule.saarland.de/"
+          target="_blank"
+          rel="noopener noreferrer">
+          Online-Schule öffnen
+        </a>
+      </div>
+    </section>
 
-      // If you would like all file writes inside Unity Application.persistentDataPath
-      // directory to automatically persist so that the contents are remembered when
-      // the user revisits the site the next time, uncomment the following line:
-      // config.autoSyncPersistentDataPath = true;
-      // This autosyncing is currently not the default behavior to avoid regressing
-      // existing user projects that might rely on the earlier manual
-      // JS_FileSystem_Sync() behavior, but in future Unity version, this will be
-      // expected to change.
+  </main>
 
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
+  <footer>
+    Meine Spiele- und Videoseite © 2025
+  </footer>
 
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
-        document.querySelector("#unity-container").className = "unity-mobile";
-        canvas.className = "unity-mobile";
-
-        // To lower canvas resolution on mobile devices to gain some
-        // performance, uncomment the following line:
-        // config.devicePixelRatio = 1;
-
-
-      } else {
-        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
-      }
-
-      document.querySelector("#unity-loading-bar").style.display = "block";
-
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
-                document.querySelector("#unity-loading-bar").style.display = "none";
-                document.querySelector("#unity-fullscreen-button").onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                };
-
-              }).catch((message) => {
-                alert(message);
-              });
-            };
-
-      document.body.appendChild(script);
-
-    </script>
-  </body>
+</body>
 </html>
