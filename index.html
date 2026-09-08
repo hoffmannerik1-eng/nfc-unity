@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meine Spiele- und Video-Webseite</title>
+  <title>GameZone Saarland</title>
 
   <style>
     * {
@@ -13,7 +13,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #101827;
+      background: #0b1020;
       color: white;
     }
 
@@ -21,38 +21,64 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: #17233b;
-      padding: 15px 25px;
+      background: linear-gradient(90deg, #121a38, #294887);
+      padding: 14px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      box-shadow: 0 3px 10px #0008;
+      justify-content: space-between;
+      gap: 15px;
+      box-shadow: 0 4px 15px #0008;
     }
 
     header h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 23px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button,
+    .button {
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 15px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .school-button {
-      background: #ffca28;
+      background: #ffd43b;
       color: #111;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 12px 18px;
-      border-radius: 8px;
-      transition: 0.2s;
     }
 
-    .school-button:hover {
-      background: #ffe082;
-      transform: scale(1.04);
+    .login-button {
+      background: #42d392;
+      color: #071b12;
+    }
+
+    .admin-button {
+      background: #ef7dff;
+      color: #210029;
+    }
+
+    button:hover,
+    .button:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
     }
 
     main {
-      max-width: 1200px;
+      width: min(1200px, 94%);
       margin: auto;
-      padding: 25px;
+      padding: 25px 0;
     }
 
     section {
@@ -60,84 +86,158 @@
     }
 
     h2 {
-      color: #ffca28;
-      border-bottom: 2px solid #ffca28;
-      padding-bottom: 8px;
+      color: #ffd43b;
+      border-bottom: 2px solid #ffd43b;
+      padding-bottom: 9px;
+    }
+
+    .box {
+      background: #182443;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 5px 18px #0007;
+      margin-top: 15px;
+    }
+
+    .notice {
+      background: #26365c;
+      border-left: 5px solid #ffd43b;
+      padding: 13px;
+      border-radius: 7px;
+      line-height: 1.5;
+    }
+
+    input {
+      width: 100%;
+      max-width: 450px;
+      padding: 12px;
+      margin: 7px 0;
+      border: 0;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    .browser-bar {
+      display: flex;
+      gap: 8px;
+    }
+
+    .browser-bar input {
+      max-width: none;
+      flex: 1;
+    }
+
+    .open-button {
+      background: #42d392;
+      color: #071b12;
+      align-self: center;
+    }
+
+    .browser iframe {
+      width: 100%;
+      height: 470px;
+      margin-top: 10px;
+      border: 0;
+      border-radius: 9px;
+      background: white;
     }
 
     .video-grid,
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 18px;
     }
 
     .video-card,
     .game-card {
-      background: #1d2b46;
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 4px 10px #0005;
+      overflow: hidden;
+      background: #182443;
+      border-radius: 13px;
+      box-shadow: 0 5px 15px #0007;
+      transition: 0.2s;
     }
 
-    iframe {
+    .video-card:hover,
+    .game-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .video-card iframe {
       width: 100%;
-      height: 190px;
+      height: 170px;
       border: 0;
-      border-radius: 8px;
     }
 
-    .game-card {
+    .game-image {
+      display: block;
+      width: 100%;
+      height: 145px;
+      object-fit: cover;
+    }
+
+    .game-content {
+      padding: 13px;
       text-align: center;
-      min-height: 145px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
 
-    .game-card h3 {
-      margin: 8px 0;
-      font-size: 18px;
+    .game-content h3 {
+      min-height: 42px;
+      margin: 5px 0 12px;
+      font-size: 17px;
     }
 
     .play-button {
-      display: inline-block;
+      width: 100%;
       background: #42d392;
       color: #071b12;
-      text-decoration: none;
-      font-weight: bold;
+    }
+
+    .admin-box {
+      border: 2px solid #ffd43b;
+    }
+
+    #peopleList {
+      padding: 0;
+      list-style: none;
+    }
+
+    #peopleList li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: #26365c;
+      margin: 8px 0;
       padding: 10px;
       border-radius: 7px;
     }
 
-    .play-button:hover {
-      background: #72efb3;
-    }
-
-    .notice {
-      background: #263957;
-      padding: 15px;
-      border-left: 5px solid #ffca28;
-      border-radius: 6px;
-      line-height: 1.5;
+    .delete-button {
+      background: #ff5c5c;
+      color: white;
     }
 
     footer {
       text-align: center;
-      padding: 25px;
-      background: #17233b;
+      background: #121a38;
       color: #cbd5e1;
+      padding: 25px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       header {
         flex-direction: column;
-        gap: 12px;
         text-align: center;
       }
 
-      header h1 {
-        font-size: 20px;
+      .browser-bar {
+        flex-direction: column;
+      }
+
+      #peopleList li {
+        flex-direction: column;
+        align-items: stretch;
       }
     }
   </style>
@@ -145,181 +245,524 @@
 
 <body>
 
-  <header>
-    <h1>🎮 Meine Spiele- und Videoseite</h1>
+<header>
+  <h1>🎮 GameZone Saarland</h1>
 
-    <!-- Link zur Online-Schule Saarland -->
+  <nav>
     <a
-      class="school-button"
-      href="https://www.online-schule.saarland.de/"
+      class="button school-button"
+      href="https://online-schule.saarland.de/"
       target="_blank"
       rel="noopener noreferrer">
       🏫 Online-Schule Saarland
     </a>
-  </header>
 
-  <main>
+    <a class="button login-button" href="#login">
+      👤 Anmeldung
+    </a>
 
-    <section>
-      <h2>📺 YouTube-Videos</h2>
+    <a
+      id="adminLink"
+      class="button admin-button"
+      href="#admin"
+      style="display: none;">
+      ⚙️ Admin
+    </a>
+  </nav>
+</header>
 
-      <div class="notice">
-        Wenn ein Video nicht angezeigt wird, hat der YouTube-Kanal das Einbetten
-        möglicherweise deaktiviert. Du kannst die Video-IDs im Code austauschen.
+<main>
+
+  <!-- BROWSER -->
+  <section id="browser">
+    <h2>🌐 Browser</h2>
+
+    <div class="box browser">
+      <div class="browser-bar">
+        <input
+          id="urlInput"
+          type="text"
+          value="https://online-schule.saarland.de/"
+          placeholder="Webadresse eingeben">
+
+        <button class="open-button" onclick="openWebsite()">
+          Öffnen
+        </button>
       </div>
+
+      <iframe
+        id="browserFrame"
+        src="https://online-schule.saarland.de/"
+        title="Browser">
+      </iframe>
+
+      <p class="notice">
+        Manche Webseiten verhindern aus Sicherheitsgründen, dass sie in einem
+        anderen Fenster angezeigt werden. Dann benutze bitte den gelben Button
+        oben, um die Webseite in einem neuen Tab zu öffnen.
+      </p>
+    </div>
+  </section>
+
+  <!-- YOUTUBE -->
+  <section>
+    <h2>📺 YouTube</h2>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/jNQXAC9IVRw"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/9bZkp7q19f0"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/kJQP7kiw5Fk"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPIELE -->
+  <section id="spiele">
+    <h2>🕹️ Mehr als 50 Spiele</h2>
+
+    <div class="box notice">
+      Wähle ein Spiel aus. Es wird im Browserbereich geöffnet. Wenn eine
+      Spiele-Webseite das Einbetten verhindert, kann sie leider nur in einem
+      neuen Tab geöffnet werden.
+    </div>
+
+    <br>
+
+    <div id="gameGrid" class="game-grid"></div>
+  </section>
+
+  <!-- ANMELDUNG -->
+  <section id="login">
+    <h2>👤 Anmeldung</h2>
+
+    <div class="box">
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="E-Mail-Adresse">
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Passwort">
 
       <br>
 
-      <div class="video-grid">
+      <button class="login-button" onclick="loginUser()">
+        Anmelden
+      </button>
 
-        <div class="video-card">
-          <h3>Video 1</h3>
-          <iframe
-            src="https://www.youtube.com/embed/jNQXAC9IVRw"
-            allowfullscreen>
-          </iframe>
-        </div>
+      <button
+        class="school-button"
+        onclick="logoutUser()">
+        Abmelden
+      </button>
 
-        <div class="video-card">
-          <h3>Video 2</h3>
-          <iframe
-            src="https://www.youtube.com/embed/9bZkp7q19f0"
-            allowfullscreen>
-          </iframe>
-        </div>
+      <p id="loginMessage"></p>
+    </div>
+  </section>
 
-        <div class="video-card">
-          <h3>Video 3</h3>
-          <iframe
-            src="https://www.youtube.com/embed/kJQP7kiw5Fk"
-            allowfullscreen>
-          </iframe>
-        </div>
+  <!-- ADMIN -->
+  <section id="admin" style="display: none;">
+    <h2>⚙️ Admin-Bereich</h2>
 
-        <div class="video-card">
-          <h3>Video 4</h3>
-          <iframe
-            src="https://www.youtube.com/embed/60ItHLz5WEA"
-            allowfullscreen>
-          </iframe>
-        </div>
+    <div class="box admin-box">
+      <h3>Person hinzufügen</h3>
 
+      <input
+        id="newEmail"
+        type="email"
+        placeholder="E-Mail-Adresse">
+
+      <input
+        id="newPassword"
+        type="password"
+        placeholder="Passwort, mindestens 6 Zeichen">
+
+      <br>
+
+      <button class="login-button" onclick="createPerson()">
+        Person hinzufügen
+      </button>
+
+      <h3>👥 Gespeicherte Personen</h3>
+
+      <ul id="peopleList"></ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  GameZone Saarland © 2025
+</footer>
+
+<!-- FIREBASE UND JAVASCRIPT -->
+<script type="module">
+
+  import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+  } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc
+  } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+  /*
+    =====================================================
+    FIREBASE-KONFIGURATION HIER EINTRAGEN
+    =====================================================
+
+    Diese Daten bekommst du in Firebase unter:
+
+    Projekteinstellungen
+    → Deine Apps
+    → Web-App
+    → Firebase SDK-Konfiguration
+  */
+
+  const firebaseConfig = {
+    apiKey: "HIER_DEINE_API_KEY_EINTRAGEN",
+    authDomain: "HIER-DEIN-PROJEKT.firebaseapp.com",
+    projectId: "HIER-DEIN-PROJEKT",
+    storageBucket: "HIER-DEIN-PROJEKT.firebasestorage.app",
+    messagingSenderId: "HIER_DEINE_MESSAGING_ID",
+    appId: "HIER_DEINE_APP_ID"
+  };
+
+
+  /*
+    Diese E-Mail bekommt Admin-Rechte.
+
+    Erstelle diesen Benutzer einmal manuell in Firebase:
+    Authentication → Users → Benutzer hinzufügen
+  */
+
+  const ADMIN_EMAIL = "admin@deine-webseite.de";
+
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+
+  /*
+    SPIELE
+  */
+
+  const spiele = [
+    "2048",
+    "Action Arena",
+    "Adventure Quest",
+    "Arcade World",
+    "Autorennen",
+    "Basketball",
+    "Billard",
+    "Bubble Shooter",
+    "Chess Master",
+    "Denkspiele",
+    "Domino",
+    "Doodle Jump",
+    "Fußball",
+    "Golf",
+    "Jump and Run",
+    "Kartenspiele",
+    "Kochspiel",
+    "Mahjong",
+    "Memory",
+    "Motorrad",
+    "Multiplayer",
+    "Parkour",
+    "Pixel Game",
+    "Puzzle",
+    "Quiz",
+    "Rennspiel",
+    "RPG World",
+    "Schach",
+    "Schießspiel",
+    "Snake",
+    "Solitaire",
+    "Sportspiele",
+    "Sudoku",
+    "Tetris",
+    "Tower Defense",
+    "Truck Game",
+    "Wortspiel",
+    "Zombie Game",
+    "3D World",
+    "4 gewinnt",
+    "Brettspiel",
+    "Farbenspiel",
+    "Flappy Bird",
+    "Halloween",
+    "Lernspiel",
+    "Mausspiel",
+    "Pferdespiel",
+    "Schulspiel",
+    "Skateboard",
+    "Superhelden",
+    "Typing Game",
+    "Wasser-Spiel",
+    "Zahlen-Spiel",
+    "2-Spieler-Spiel",
+    "Karten-Memory",
+    "Fußball-Elfmeter",
+    "Mini Golf",
+    "Reaktionsspiel",
+    "Weltraumspiel"
+  ];
+
+  const bilder = [
+    "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=800&q=80"
+  ];
+
+  const gameGrid = document.getElementById("gameGrid");
+
+  spiele.forEach((spiel, index) => {
+    const bild = bilder[index % bilder.length];
+
+    const gameCard = document.createElement("div");
+    gameCard.className = "game-card";
+
+    gameCard.innerHTML = `
+      <img
+        class="game-image"
+        src="${bild}"
+        alt="${spiel}">
+
+      <div class="game-content">
+        <h3>🎮 ${index + 1}. ${spiel}</h3>
+
+        <button
+          class="play-button"
+          data-game="${spiel}">
+          Jetzt spielen
+        </button>
       </div>
-    </section>
+    `;
 
-    <section>
-      <h2>🕹️ Mehr als 50 Spiele</h2>
+    gameCard.querySelector("button").addEventListener("click", () => {
+      startGame(spiel);
+    });
 
-      <div class="game-grid">
+    gameGrid.appendChild(gameCard);
+  });
 
-        <script>
-          const spiele = [
-            "Action Games",
-            "Adventure Games",
-            "Arcade Spiele",
-            "Autorennen",
-            "Basketball",
-            "Billard",
-            "Brettspiele",
-            "Bubble Shooter",
-            "Cars Spiele",
-            "Casual Games",
-            "Denkspiele",
-            "Domino",
-            "Doodle Jump",
-            "Drachen Spiele",
-            "Fußball",
-            "Farbenspiele",
-            "Flappy Bird",
-            "Golf",
-            "Halloween Spiele",
-            "Jump and Run",
-            "Kartenspiele",
-            "Klassische Spiele",
-            "Kochspiele",
-            "Lernspiele",
-            "Mahjong",
-            "Mausspiele",
-            "Memory",
-            "Minecraft Spiele",
-            "Motorrad Spiele",
-            "Multiplayer Spiele",
-            "Musikspiele",
-            "Parkour",
-            "Pferdespiele",
-            "Pixel Spiele",
-            "Puzzle",
-            "Quizspiele",
-            "Rennspiele",
-            "RPG Spiele",
-            "Schach",
-            "Schießspiele",
-            "Schneeball Spiele",
-            "Schulspiele",
-            "Skateboard",
-            "Snake",
-            "Solitaire",
-            "Sportspiele",
-            "Sudoku",
-            "Superhelden Spiele",
-            "Tetris",
-            "Tower Defense",
-            "Truck Spiele",
-            "Typing Games",
-            "Wasser Spiele",
-            "Wortspiele",
-            "Zombie Spiele",
-            "2-Spieler-Spiele",
-            "3D Spiele",
-            "4-Gewinnt",
-            "2048",
-            "Karten-Memory"
-          ];
 
-          const zielseite = "https://poki.com/de";
+  function startGame(name) {
+    const gameUrl = "https://poki.com/de";
 
-          spiele.forEach((spiel, index) => {
-            document.write(`
-              <div class="game-card">
-                <h3>🎮 ${index + 1}. ${spiel}</h3>
-                <a
-                  class="play-button"
-                  href="${zielseite}"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Jetzt spielen
-                </a>
-              </div>
-            `);
-          });
-        </script>
+    document.getElementById("urlInput").value = gameUrl;
+    document.getElementById("browserFrame").src = gameUrl;
 
-      </div>
-    </section>
+    document.getElementById("browser").scrollIntoView({
+      behavior: "smooth"
+    });
+  }
 
-    <section>
-      <h2>🏫 Online-Schule Saarland</h2>
 
-      <div class="notice">
-        Über den Button oben kannst du direkt die Online-Schule Saarland
-        in einem neuen Tab öffnen.
-        <br><br>
+  window.openWebsite = function () {
+    let url = document.getElementById("urlInput").value.trim();
 
-        <a
-          class="school-button"
-          href="https://www.online-schule.saarland.de/"
-          target="_blank"
-          rel="noopener noreferrer">
-          Online-Schule öffnen
-        </a>
-      </div>
-    </section>
+    if (!url) {
+      return;
+    }
 
-  </main>
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      url = "https://" + url;
+    }
 
-  <footer>
-    Meine Spiele- und Videoseite © 2025
-  </footer>
+    document.getElementById("browserFrame").src = url;
+  };
+
+
+  /*
+    ANMELDUNG
+  */
+
+  window.loginUser = async function () {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const message = document.getElementById("loginMessage");
+
+    if (!email || !password) {
+      message.textContent = "Bitte E-Mail und Passwort eingeben.";
+      return;
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      message.textContent = "Erfolgreich angemeldet.";
+    } catch (error) {
+      message.textContent =
+        "Anmeldung fehlgeschlagen. Bitte Daten prüfen.";
+      console.error(error);
+    }
+  };
+
+
+  window.logoutUser = async function () {
+    await signOut(auth);
+    document.getElementById("loginMessage").textContent =
+      "Du wurdest abgemeldet.";
+  };
+
+
+  /*
+    ADMIN: PERSON ANLEGEN
+
+    Hinweis:
+    Firebase wechselt beim Erstellen im Browser zum neuen Benutzer.
+    Deshalb ist es besser, Benutzer direkt in Firebase unter
+    Authentication → Users anzulegen.
+
+    Der Button ist trotzdem enthalten, wie gewünscht.
+  */
+
+  window.createPerson = async function () {
+    const email = document.getElementById("newEmail").value.trim();
+    const password = document.getElementById("newPassword").value;
+
+    if (!email || !password) {
+      alert("Bitte E-Mail und Passwort eingeben.");
+      return;
+    }
+
+    if (password.length < 6) {
+      alert("Das Passwort muss mindestens 6 Zeichen haben.");
+      return;
+    }
+
+    try {
+      const userCredential =
+        await createUserWithEmailAndPassword(auth, email, password);
+
+      await addDoc(collection(db, "personen"), {
+        email: email,
+        uid: userCredential.user.uid,
+        erstelltAm: new Date().toISOString()
+      });
+
+      alert(
+        "Person wurde erstellt. Du bist jetzt mit diesem neuen Konto angemeldet."
+      );
+
+      await loadPeople();
+
+    } catch (error) {
+      alert("Fehler beim Erstellen: " + error.message);
+    }
+  };
+
+
+  /*
+    PERSONEN AUS FIRESTORE LADEN
+  */
+
+  async function loadPeople() {
+    const list = document.getElementById("peopleList");
+    list.innerHTML = "";
+
+    try {
+      const snapshot = await getDocs(collection(db, "personen"));
+
+      snapshot.forEach((person) => {
+        const data = person.data();
+
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+          <span>${data.email}</span>
+          <button class="delete-button">
+            Löschen
+          </button>
+        `;
+
+        li.querySelector("button").addEventListener("click", () => {
+          deletePerson(person.id);
+        });
+
+        list.appendChild(li);
+      });
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+  async function deletePerson(id) {
+    if (!confirm("Diese Person wirklich löschen?")) {
+      return;
+    }
+
+    try {
+      await deleteDoc(doc(db, "personen", id));
+      alert("Person wurde aus der Liste gelöscht.");
+      await loadPeople();
+    } catch (error) {
+      alert("Fehler beim Löschen: " + error.message);
+    }
+  }
+
+
+  /*
+    BENUTZERSTATUS PRÜFEN
+  */
+
+  onAuthStateChanged(auth, (user) => {
+    const adminSection = document.getElementById("admin");
+    const adminLink = document.getElementById("adminLink");
+
+    if (user && user.email === ADMIN_EMAIL) {
+      adminSection.style.display = "block";
+      adminLink.style.display = "inline-block";
+      loadPeople();
+    } else {
+      adminSection.style.display = "none";
+      adminLink.style.display = "none";
+    }
+  });
+
+</script>
 
 </body>
 </html>
