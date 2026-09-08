@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -52,6 +53,13 @@
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
+      transition: 0.2s;
+    }
+
+    button:hover,
+    .button:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
     }
 
     .school-button {
@@ -67,12 +75,6 @@
     .admin-button {
       background: #ef7dff;
       color: #210029;
-    }
-
-    button:hover,
-    .button:hover {
-      filter: brightness(1.15);
-      transform: translateY(-1px);
     }
 
     main {
@@ -117,9 +119,14 @@
       font-size: 15px;
     }
 
+    /* =========================
+       BROWSER
+       ========================= */
+
     .browser-bar {
       display: flex;
       gap: 8px;
+      align-items: center;
     }
 
     .browser-bar input {
@@ -130,17 +137,74 @@
     .open-button {
       background: #42d392;
       color: #071b12;
-      align-self: center;
+      white-space: nowrap;
+    }
+
+    .new-tab-button {
+      background: #ffd43b;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    .browser-frame-container {
+      position: relative;
+      margin-top: 10px;
+      width: 100%;
+      height: 470px;
+      background: white;
+      border-radius: 9px;
+      overflow: hidden;
     }
 
     .browser iframe {
       width: 100%;
-      height: 470px;
-      margin-top: 10px;
+      height: 100%;
       border: 0;
-      border-radius: 9px;
       background: white;
     }
+
+    /* Nachricht über dem Browser */
+
+    .browser-message {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      background: #182443;
+      z-index: 5;
+    }
+
+    .browser-message-content {
+      max-width: 600px;
+    }
+
+    .browser-message h3 {
+      font-size: 25px;
+      color: #ffd43b;
+      margin-bottom: 12px;
+    }
+
+    .browser-message p {
+      color: #d7deed;
+      line-height: 1.6;
+    }
+
+    .browser-message button {
+      margin-top: 10px;
+    }
+
+    .browser-status {
+      margin-top: 10px;
+      color: #b9c5dc;
+      font-size: 14px;
+    }
+
+    /* =========================
+       SPIELE
+       ========================= */
 
     .video-grid,
     .game-grid {
@@ -193,6 +257,17 @@
       color: #071b12;
     }
 
+    .external-game-button {
+      width: 100%;
+      margin-top: 7px;
+      background: #ffd43b;
+      color: #111;
+    }
+
+    /* =========================
+       ADMIN
+       ========================= */
+
     .admin-box {
       border: 2px solid #ffd43b;
     }
@@ -226,6 +301,7 @@
     }
 
     @media (max-width: 700px) {
+
       header {
         flex-direction: column;
         text-align: center;
@@ -233,6 +309,11 @@
 
       .browser-bar {
         flex-direction: column;
+      }
+
+      .browser-bar input,
+      .browser-bar button {
+        width: 100%;
       }
 
       #peopleList li {
@@ -246,9 +327,11 @@
 <body>
 
 <header>
+
   <h1>🎮 GameZone Saarland</h1>
 
   <nav>
+
     <a
       class="button school-button"
       href="https://online-schule.saarland.de/"
@@ -257,7 +340,9 @@
       🏫 Online-Schule Saarland
     </a>
 
-    <a class="button login-button" href="#login">
+    <a
+      class="button login-button"
+      href="#login">
       👤 Anmeldung
     </a>
 
@@ -268,90 +353,197 @@
       style="display: none;">
       ⚙️ Admin
     </a>
+
   </nav>
+
 </header>
+
 
 <main>
 
-  <!-- BROWSER -->
+  <!-- =========================
+       BROWSER
+       ========================= -->
+
   <section id="browser">
+
     <h2>🌐 Browser</h2>
 
     <div class="box browser">
+
       <div class="browser-bar">
+
         <input
           id="urlInput"
           type="text"
           value="https://online-schule.saarland.de/"
           placeholder="Webadresse eingeben">
 
-        <button class="open-button" onclick="openWebsite()">
+        <button
+          class="open-button"
+          onclick="openWebsite()">
           Öffnen
         </button>
+
+        <button
+          class="new-tab-button"
+          onclick="openNewTab()">
+          ↗ Neuer Tab
+        </button>
+
       </div>
 
-      <iframe
-        id="browserFrame"
-        src="https://online-schule.saarland.de/"
-        title="Browser">
-      </iframe>
+
+      <div class="browser-frame-container">
+
+        <iframe
+          id="browserFrame"
+          src="https://online-schule.saarland.de/"
+          title="GameZone Browser"
+          allow="fullscreen">
+        </iframe>
+
+
+        <!-- Wird angezeigt, wenn eine Seite nicht eingebettet werden kann -->
+
+        <div
+          id="browserMessage"
+          class="browser-message">
+
+          <div class="browser-message-content">
+
+            <h3>🌐 Webseite kann hier nicht angezeigt werden</h3>
+
+            <p>
+              Diese Webseite verhindert aus Sicherheitsgründen,
+              dass sie innerhalb einer anderen Website angezeigt wird.
+            </p>
+
+            <p>
+              Du kannst sie trotzdem problemlos in einem neuen Tab öffnen.
+            </p>
+
+            <button
+              class="new-tab-button"
+              onclick="openNewTab()">
+              ↗ Webseite in neuem Tab öffnen
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="browserStatus"
+        class="browser-status">
+        Webseite wird geladen ...
+      </div>
+
 
       <p class="notice">
-        Manche Webseiten verhindern aus Sicherheitsgründen, dass sie in einem
-        anderen Fenster angezeigt werden. Dann benutze bitte den gelben Button
-        oben, um die Webseite in einem neuen Tab zu öffnen.
+
+        💡 Manche Webseiten erlauben keine Anzeige innerhalb
+        eines anderen Browsers. In diesem Fall kannst du oben
+        „Neuer Tab“ benutzen.
+
       </p>
+
     </div>
+
   </section>
 
-  <!-- YOUTUBE -->
+
+  <!-- =========================
+       YOUTUBE
+       ========================= -->
+
   <section>
+
     <h2>📺 YouTube</h2>
 
     <div class="video-grid">
+
       <div class="video-card">
+
         <iframe
           src="https://www.youtube.com/embed/jNQXAC9IVRw"
           allowfullscreen>
         </iframe>
+
       </div>
 
+
       <div class="video-card">
+
         <iframe
           src="https://www.youtube.com/embed/9bZkp7q19f0"
           allowfullscreen>
         </iframe>
+
       </div>
 
+
       <div class="video-card">
+
         <iframe
           src="https://www.youtube.com/embed/kJQP7kiw5Fk"
           allowfullscreen>
         </iframe>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- SPIELE -->
+
+  <!-- =========================
+       SPIELE
+       ========================= -->
+
   <section id="spiele">
+
     <h2>🕹️ Mehr als 50 Spiele</h2>
 
     <div class="box notice">
-      Wähle ein Spiel aus. Es wird im Browserbereich geöffnet. Wenn eine
-      Spiele-Webseite das Einbetten verhindert, kann sie leider nur in einem
-      neuen Tab geöffnet werden.
+
+      Wähle ein Spiel aus.
+
+      <br>
+
+      Die Spiele-Webseite wird im Browserbereich
+      geöffnet, sofern sie das Einbetten erlaubt.
+
+      <br>
+
+      Wenn das Spiel das Einbetten verhindert,
+      kannst du es in einem neuen Tab öffnen.
+
     </div>
 
     <br>
 
-    <div id="gameGrid" class="game-grid"></div>
+    <div
+      id="gameGrid"
+      class="game-grid">
+    </div>
+
   </section>
 
-  <!-- ANMELDUNG -->
+
+  <!-- =========================
+       ANMELDUNG
+       ========================= -->
+
   <section id="login">
+
     <h2>👤 Anmeldung</h2>
 
     <div class="box">
+
       <input
         id="loginEmail"
         type="email"
@@ -364,7 +556,9 @@
 
       <br>
 
-      <button class="login-button" onclick="loginUser()">
+      <button
+        class="login-button"
+        onclick="loginUser()">
         Anmelden
       </button>
 
@@ -375,14 +569,24 @@
       </button>
 
       <p id="loginMessage"></p>
+
     </div>
+
   </section>
 
-  <!-- ADMIN -->
-  <section id="admin" style="display: none;">
+
+  <!-- =========================
+       ADMIN
+       ========================= -->
+
+  <section
+    id="admin"
+    style="display: none;">
+
     <h2>⚙️ Admin-Bereich</h2>
 
     <div class="box admin-box">
+
       <h3>Person hinzufügen</h3>
 
       <input
@@ -397,27 +601,39 @@
 
       <br>
 
-      <button class="login-button" onclick="createPerson()">
+      <button
+        class="login-button"
+        onclick="createPerson()">
         Person hinzufügen
       </button>
+
 
       <h3>👥 Gespeicherte Personen</h3>
 
       <ul id="peopleList"></ul>
+
     </div>
+
   </section>
 
 </main>
 
+
 <footer>
-  GameZone Saarland © 2025
+
+  GameZone Saarland © 2026
+
 </footer>
 
-<!-- FIREBASE UND JAVASCRIPT -->
+
+<!-- =========================
+     FIREBASE
+     ========================= -->
+
 <script type="module">
 
-  import { initializeApp } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
   import {
     getAuth,
@@ -425,8 +641,8 @@
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     signOut
-  } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
   import {
     getFirestore,
@@ -435,53 +651,217 @@
     getDocs,
     deleteDoc,
     doc
-  } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-  /*
-    =====================================================
-    FIREBASE-KONFIGURATION HIER EINTRAGEN
-    =====================================================
-
-    Diese Daten bekommst du in Firebase unter:
-
-    Projekteinstellungen
-    → Deine Apps
-    → Web-App
-    → Firebase SDK-Konfiguration
-  */
+  /* =========================
+     FIREBASE KONFIGURATION
+     ========================= */
 
   const firebaseConfig = {
+
     apiKey: "HIER_DEINE_API_KEY_EINTRAGEN",
-    authDomain: "HIER-DEIN-PROJEKT.firebaseapp.com",
-    projectId: "HIER-DEIN-PROJEKT",
-    storageBucket: "HIER-DEIN-PROJEKT.firebasestorage.app",
-    messagingSenderId: "HIER_DEINE_MESSAGING_ID",
-    appId: "HIER_DEINE_APP_ID"
+
+    authDomain:
+      "HIER-DEIN-PROJEKT.firebaseapp.com",
+
+    projectId:
+      "HIER-DEIN-PROJEKT",
+
+    storageBucket:
+      "HIER-DEIN-PROJEKT.firebasestorage.app",
+
+    messagingSenderId:
+      "HIER_DEINE_MESSAGING_ID",
+
+    appId:
+      "HIER_DEINE_APP_ID"
+
+  };
+
+
+  /* =========================
+     ADMIN
+     ========================= */
+
+  const ADMIN_EMAIL =
+    "admin@deine-webseite.de";
+
+
+  const app =
+    initializeApp(firebaseConfig);
+
+  const auth =
+    getAuth(app);
+
+  const db =
+    getFirestore(app);
+
+
+  /* =========================
+     BROWSER
+     ========================= */
+
+  const urlInput =
+    document.getElementById("urlInput");
+
+  const browserFrame =
+    document.getElementById("browserFrame");
+
+  const browserMessage =
+    document.getElementById("browserMessage");
+
+  const browserStatus =
+    document.getElementById("browserStatus");
+
+
+  let currentUrl =
+    urlInput.value;
+
+
+  function normalizeUrl(url) {
+
+    url = url.trim();
+
+    if (!url) {
+      return "";
+    }
+
+    if (
+      !url.startsWith("http://") &&
+      !url.startsWith("https://")
+    ) {
+
+      url = "https://" + url;
+
+    }
+
+    return url;
+
+  }
+
+
+  window.openWebsite = function () {
+
+    const url =
+      normalizeUrl(urlInput.value);
+
+    if (!url) {
+
+      browserStatus.textContent =
+        "Bitte eine Webadresse eingeben.";
+
+      return;
+
+    }
+
+    currentUrl = url;
+
+    urlInput.value = url;
+
+    browserMessage.style.display =
+      "none";
+
+    browserStatus.textContent =
+      "🌐 Webseite wird geladen ...";
+
+
+    browserFrame.src = url;
+
+  };
+
+
+  window.openNewTab = function () {
+
+    const url =
+      normalizeUrl(urlInput.value);
+
+    if (!url) {
+      return;
+    }
+
+    window.open(
+      url,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
   };
 
 
   /*
-    Diese E-Mail bekommt Admin-Rechte.
-
-    Erstelle diesen Benutzer einmal manuell in Firebase:
-    Authentication → Users → Benutzer hinzufügen
+    Wenn der iframe geladen wird,
+    zeigen wir wieder den normalen Browser an.
   */
 
-  const ADMIN_EMAIL = "admin@deine-webseite.de";
+  browserFrame.addEventListener(
+    "load",
+    function () {
 
+      browserStatus.textContent =
+        "✅ Webseite geladen";
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+    }
+  );
 
 
   /*
-    SPIELE
+    Nach einigen Sekunden prüfen wir,
+    ob der iframe offensichtlich leer geblieben ist.
+
+    Wichtig:
+    JavaScript kann aus Sicherheitsgründen
+    nicht direkt den Inhalt fremder Webseiten lesen.
   */
 
+  let loadTimer;
+
+
+  function checkBrowser() {
+
+    clearTimeout(loadTimer);
+
+    loadTimer = setTimeout(() => {
+
+      /*
+        Wir zeigen den Hinweis nicht bei
+        bekannten Seiten, die normalerweise
+        eingebettet werden.
+      */
+
+      const bekannteIframeSeite =
+        currentUrl.includes("youtube.com") ||
+        currentUrl.includes("youtube-nocookie.com");
+
+
+      if (!bekannteIframeSeite) {
+
+        browserMessage.style.display =
+          "flex";
+
+        browserStatus.textContent =
+          "⚠️ Die Webseite könnte das Einbetten verhindern.";
+
+      }
+
+    }, 5000);
+
+  }
+
+
+  browserFrame.addEventListener(
+    "load",
+    checkBrowser
+  );
+
+
+  /* =========================
+     SPIELE
+     ========================= */
+
   const spiele = [
+
     "2048",
     "Action Arena",
     "Adventure Quest",
@@ -541,228 +921,506 @@
     "Mini Golf",
     "Reaktionsspiel",
     "Weltraumspiel"
+
   ];
+
 
   const bilder = [
+
     "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
+
     "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+
     "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+
     "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=800&q=80",
+
     "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=800&q=80",
+
     "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80",
+
     "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=800&q=80",
+
     "https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=800&q=80"
+
   ];
 
-  const gameGrid = document.getElementById("gameGrid");
+
+  const gameGrid =
+    document.getElementById("gameGrid");
+
 
   spiele.forEach((spiel, index) => {
-    const bild = bilder[index % bilder.length];
 
-    const gameCard = document.createElement("div");
-    gameCard.className = "game-card";
+    const bild =
+      bilder[index % bilder.length];
+
+
+    const gameCard =
+      document.createElement("div");
+
+    gameCard.className =
+      "game-card";
+
 
     gameCard.innerHTML = `
+
       <img
         class="game-image"
         src="${bild}"
         alt="${spiel}">
 
       <div class="game-content">
-        <h3>🎮 ${index + 1}. ${spiel}</h3>
+
+        <h3>
+          🎮 ${index + 1}. ${spiel}
+        </h3>
 
         <button
-          class="play-button"
-          data-game="${spiel}">
-          Jetzt spielen
+          class="play-button">
+          🎮 Im Browser öffnen
         </button>
+
+        <button
+          class="external-game-button">
+          ↗ Neuer Tab
+        </button>
+
       </div>
+
     `;
 
-    gameCard.querySelector("button").addEventListener("click", () => {
-      startGame(spiel);
-    });
+
+    const buttons =
+      gameCard.querySelectorAll("button");
+
+
+    buttons[0].addEventListener(
+      "click",
+      () => startGame(spiel)
+    );
+
+
+    buttons[1].addEventListener(
+      "click",
+      () => openGameNewTab(spiel)
+    );
+
 
     gameGrid.appendChild(gameCard);
+
   });
+
+
+  /*
+    Aktuell werden die Spiele
+    über Poki geöffnet.
+
+    Später können wir jedem Spiel
+    eine eigene URL geben.
+  */
+
+  function getGameUrl(name) {
+
+    return "https://poki.com/de";
+
+  }
 
 
   function startGame(name) {
-    const gameUrl = "https://poki.com/de";
 
-    document.getElementById("urlInput").value = gameUrl;
-    document.getElementById("browserFrame").src = gameUrl;
+    const gameUrl =
+      getGameUrl(name);
 
-    document.getElementById("browser").scrollIntoView({
-      behavior: "smooth"
-    });
+
+    urlInput.value =
+      gameUrl;
+
+    currentUrl =
+      gameUrl;
+
+
+    browserMessage.style.display =
+      "none";
+
+
+    browserFrame.src =
+      gameUrl;
+
+
+    document
+      .getElementById("browser")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
   }
 
 
-  window.openWebsite = function () {
-    let url = document.getElementById("urlInput").value.trim();
+  function openGameNewTab(name) {
 
-    if (!url) {
-      return;
-    }
-
-    if (!url.startsWith("http://") && !url.startsWith("https://")) {
-      url = "https://" + url;
-    }
-
-    document.getElementById("browserFrame").src = url;
-  };
+    const gameUrl =
+      getGameUrl(name);
 
 
-  /*
-    ANMELDUNG
-  */
+    window.open(
+      gameUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
 
-  window.loginUser = async function () {
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value;
-    const message = document.getElementById("loginMessage");
-
-    if (!email || !password) {
-      message.textContent = "Bitte E-Mail und Passwort eingeben.";
-      return;
-    }
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      message.textContent = "Erfolgreich angemeldet.";
-    } catch (error) {
-      message.textContent =
-        "Anmeldung fehlgeschlagen. Bitte Daten prüfen.";
-      console.error(error);
-    }
-  };
+  }
 
 
-  window.logoutUser = async function () {
-    await signOut(auth);
-    document.getElementById("loginMessage").textContent =
-      "Du wurdest abgemeldet.";
-  };
+  /* =========================
+     LOGIN
+     ========================= */
+
+  window.loginUser =
+    async function () {
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
 
 
-  /*
-    ADMIN: PERSON ANLEGEN
-
-    Hinweis:
-    Firebase wechselt beim Erstellen im Browser zum neuen Benutzer.
-    Deshalb ist es besser, Benutzer direkt in Firebase unter
-    Authentication → Users anzulegen.
-
-    Der Button ist trotzdem enthalten, wie gewünscht.
-  */
-
-  window.createPerson = async function () {
-    const email = document.getElementById("newEmail").value.trim();
-    const password = document.getElementById("newPassword").value;
-
-    if (!email || !password) {
-      alert("Bitte E-Mail und Passwort eingeben.");
-      return;
-    }
-
-    if (password.length < 6) {
-      alert("Das Passwort muss mindestens 6 Zeichen haben.");
-      return;
-    }
-
-    try {
-      const userCredential =
-        await createUserWithEmailAndPassword(auth, email, password);
-
-      await addDoc(collection(db, "personen"), {
-        email: email,
-        uid: userCredential.user.uid,
-        erstelltAm: new Date().toISOString()
-      });
-
-      alert(
-        "Person wurde erstellt. Du bist jetzt mit diesem neuen Konto angemeldet."
-      );
-
-      await loadPeople();
-
-    } catch (error) {
-      alert("Fehler beim Erstellen: " + error.message);
-    }
-  };
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
 
 
-  /*
-    PERSONEN AUS FIRESTORE LADEN
-  */
+      const message =
+        document
+          .getElementById("loginMessage");
+
+
+      if (!email || !password) {
+
+        message.textContent =
+          "Bitte E-Mail und Passwort eingeben.";
+
+        return;
+
+      }
+
+
+      try {
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+        message.textContent =
+          "✅ Erfolgreich angemeldet.";
+
+      }
+
+      catch (error) {
+
+        message.textContent =
+          "❌ Anmeldung fehlgeschlagen. Bitte Daten prüfen.";
+
+        console.error(error);
+
+      }
+
+    };
+
+
+  window.logoutUser =
+    async function () {
+
+      await signOut(auth);
+
+      document
+        .getElementById("loginMessage")
+        .textContent =
+        "Du wurdest abgemeldet.";
+
+    };
+
+
+  /* =========================
+     PERSON ERSTELLEN
+     ========================= */
+
+  window.createPerson =
+    async function () {
+
+      const email =
+        document
+          .getElementById("newEmail")
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById("newPassword")
+          .value;
+
+
+      if (!email || !password) {
+
+        alert(
+          "Bitte E-Mail und Passwort eingeben."
+        );
+
+        return;
+
+      }
+
+
+      if (password.length < 6) {
+
+        alert(
+          "Das Passwort muss mindestens 6 Zeichen haben."
+        );
+
+        return;
+
+      }
+
+
+      try {
+
+        const userCredential =
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+        await addDoc(
+          collection(db, "personen"),
+          {
+
+            email: email,
+
+            uid:
+              userCredential.user.uid,
+
+            erstelltAm:
+              new Date().toISOString()
+
+          }
+        );
+
+
+        alert(
+          "Person wurde erstellt. Du bist jetzt mit diesem neuen Konto angemeldet."
+        );
+
+
+        await loadPeople();
+
+      }
+
+      catch (error) {
+
+        alert(
+          "Fehler beim Erstellen: " +
+          error.message
+        );
+
+      }
+
+    };
+
+
+  /* =========================
+     PERSONEN LADEN
+     ========================= */
 
   async function loadPeople() {
-    const list = document.getElementById("peopleList");
+
+    const list =
+      document.getElementById(
+        "peopleList"
+      );
+
+
     list.innerHTML = "";
 
+
     try {
-      const snapshot = await getDocs(collection(db, "personen"));
 
-      snapshot.forEach((person) => {
-        const data = person.data();
+      const snapshot =
+        await getDocs(
+          collection(
+            db,
+            "personen"
+          )
+        );
 
-        const li = document.createElement("li");
 
-        li.innerHTML = `
-          <span>${data.email}</span>
-          <button class="delete-button">
-            Löschen
-          </button>
-        `;
+      snapshot.forEach(
+        (person) => {
 
-        li.querySelector("button").addEventListener("click", () => {
-          deletePerson(person.id);
-        });
+          const data =
+            person.data();
 
-        list.appendChild(li);
-      });
 
-    } catch (error) {
-      console.error(error);
+          const li =
+            document.createElement("li");
+
+
+          li.innerHTML = `
+
+            <span>
+              ${data.email}
+            </span>
+
+            <button
+              class="delete-button">
+              Löschen
+            </button>
+
+          `;
+
+
+          li
+            .querySelector("button")
+            .addEventListener(
+              "click",
+              () => {
+                deletePerson(
+                  person.id
+                );
+              }
+            );
+
+
+          list.appendChild(li);
+
+        }
+      );
+
     }
+
+    catch (error) {
+
+      console.error(error);
+
+      list.innerHTML =
+        "<li>OrdnerSystem konnte nicht geladen werden.</li>";
+
+    }
+
   }
 
+
+  /* =========================
+     PERSON LÖSCHEN
+     ========================= */
 
   async function deletePerson(id) {
-    if (!confirm("Diese Person wirklich löschen?")) {
+
+    if (
+      !confirm(
+        "Diese Person wirklich löschen?"
+      )
+    ) {
+
       return;
+
     }
 
+
     try {
-      await deleteDoc(doc(db, "personen", id));
-      alert("Person wurde aus der Liste gelöscht.");
+
+      await deleteDoc(
+        doc(
+          db,
+          "personen",
+          id
+        )
+      );
+
+
+      alert(
+        "Person wurde aus der Liste gelöscht."
+      );
+
+
       await loadPeople();
-    } catch (error) {
-      alert("Fehler beim Löschen: " + error.message);
+
     }
+
+    catch (error) {
+
+      alert(
+        "Fehler beim Löschen: " +
+        error.message
+      );
+
+    }
+
   }
 
 
-  /*
-    BENUTZERSTATUS PRÜFEN
-  */
+  /* =========================
+     BENUTZERSTATUS
+     ========================= */
 
-  onAuthStateChanged(auth, (user) => {
-    const adminSection = document.getElementById("admin");
-    const adminLink = document.getElementById("adminLink");
+  onAuthStateChanged(
+    auth,
+    (user) => {
 
-    if (user && user.email === ADMIN_EMAIL) {
-      adminSection.style.display = "block";
-      adminLink.style.display = "inline-block";
-      loadPeople();
-    } else {
-      adminSection.style.display = "none";
-      adminLink.style.display = "none";
+      const adminSection =
+        document.getElementById(
+          "admin"
+        );
+
+
+      const adminLink =
+        document.getElementById(
+          "adminLink"
+        );
+
+
+      if (
+        user &&
+        user.email === ADMIN_EMAIL
+      ) {
+
+        adminSection.style.display =
+          "block";
+
+        adminLink.style.display =
+          "inline-block";
+
+
+        loadPeople();
+
+      }
+
+      else {
+
+        adminSection.style.display =
+          "none";
+
+        adminLink.style.display =
+          "none";
+
+      }
+
     }
-  });
+  );
 
 </script>
 
 </body>
 </html>
+```
+
+**Wichtig:** Der Browser kann technisch nicht erzwingen, dass eine fremde Website in einem `<iframe>` funktioniert. Wenn z. B. Poki oder eine andere Seite das Einbetten verbietet, wird deshalb automatisch die Möglichkeit angeboten, sie in einem neuen Tab zu öffnen.
+
+Außerdem ist in deinem bisherigen Code ein zweites Problem: **Alle 60 Spiele führen momentan zu derselben Poki-Seite.** Wenn du möchtest, können wir als Nächstes jedem Spiel eine **eigene echte URL** geben und daraus ein richtiges GameZone-Spieleportal machen.
